@@ -1,0 +1,59 @@
+1.服务器端Apache-Subversion-1.10.3：解压即可，可以将bin配置到环境变量path中
+2.客户端TortoiseSVN-1.10.2.28392-x64-svn-1.10.3，安装，注意创建目录
+     重启电脑
+
+3.创建一个新的文件夹作为版本库目录，进入这个目录，点击右键，选择执行create repository here命令
+     确定将这个目录作为版本库
+4.启动版本库服务：
+     打开命令窗口，执行服务器端svnserve命令（配置环境变量执行执行，或者命令窗口上进入命令bin目录执行）
+     svnserve -d -r   上一步创建的版本库目录路径
+    回车，不要关闭命令窗口
+
+5.创建一个新的目录作为客户端，进入目录，点击右键选择执行check out
+     输入服务路径:svn://localhost
+
+===============================================================
+修改权限：版本库目录中conf下面的svnserve.conf
+1)匿名用户：anon-access = write，去掉前面的注释和空格，将权限改为write
+      # anon-access = read----->anon-access = write
+
+2)不使用匿名用户，将anon-access注释，开启授权
+     修改# auth-access = write------>去掉#和空格，auth-access = write
+    # password-db = passwd------》去掉#和空格，设置用户和密码
+    # authz-db = authz----》去掉#和空格，给用户授权
+
+
+
+[/]    版本库根目录
+admin=rw      admin用户有读写权限
+*=r          所有人都有可读权限
+
+
+[/library]    对于library项目
+admin=rw
+zhangsan=rw
+lisi=r
+
+
+
+注意修改操作用户，如果修改权限：删除C:\Users\Administrator\AppData\Roaming\Subversion下auth目录
+    
+
+============================================================
+eclipse下使用svn
+1.安装插件，参照文档
+2.重启eclipse
+3.wendow-->show view-->svn-->svn资源库
+4.项目提交：选中项目右键---》team--->share project-->svn-->选择资源库---->提交项目
+5。项目下载：
+     import-->svn--->从svn检出项目--->
+6.选中修改文件，右键--》team-->commit    更新文件选择update
+
+
+
+
+
+
+
+
+
